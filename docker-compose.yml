@@ -13,8 +13,9 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U app -d app"]
       interval: 5s
-      timeout: 3s
-      retries: 20
+      timeout: 5s
+      retries: 24
+      start_period: 30s
 
   # Crawl4AI Docker service (unclecode/crawl4ai); API calls it via CRAWL4AI_BASE_URL.
   crawl4ai:
