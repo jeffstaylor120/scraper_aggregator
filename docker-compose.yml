@@ -1,6 +1,8 @@
 services:
   db:
-    image: pgvector/pgvector:pg16
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     environment:
       POSTGRES_DB: app
       POSTGRES_USER: app
@@ -9,7 +11,7 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./db/init:/docker-entrypoint-initdb.d:ro
+    # Init scripts baked into image (no mount) to avoid Coolify permission denied on /docker-entrypoint-initdb.d
     # Coolify/slow hosts: long start_period so init scripts (4 SQL files) can finish before "healthy".
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U app -d app"]
