@@ -1,0 +1,18 @@
+fastapi==0.115.6
+uvicorn[standard]==0.30.6
+python-multipart>=0.0.9  # required for Form() / multipart form data
+
+pydantic==2.9.2
+pydantic-settings==2.6.1
+
+SQLAlchemy==2.0.36
+asyncpg==0.30.0
+
+# 2.x required for client.responses (Responses API / web_search)
+openai>=2.0.0,<3
+
+# crawl4ai/playwright removed; reintegrate when adding /crawl back.
+beautifulsoup4==4.12.3
+pypdf>=5.0.0  # local PDF text extraction when Crawl4AI PDF API is unavailable
+lxml==5.3.0
+tiktoken==0.8.0

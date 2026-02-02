@@ -1,0 +1,16 @@
+# docker-compose.dev.yml — hot reload for api + frontend (mount source).
+# Use: docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+# Full stack: db + crawl4ai + api (reload) + frontend (reload).
+
+services:
+  api:
+    build: .
+    volumes:
+      - ./app:/app/app
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  frontend:
+    volumes:
+      - ./frontend:/app
+      # Keep node_modules from image (don't overwrite with host)
+      - /app/node_modules
